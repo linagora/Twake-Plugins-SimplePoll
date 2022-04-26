@@ -87,11 +87,6 @@ export const sendPoll = async (event: HookEvent) => {
       ];
     for (let i = 0; i < option_name.votes.users.length; i++) {
       if (event.content.user?.id === option_name.votes.users[i]) {
-        console.log(
-          "VERIFIED :",
-          event.content.user?.id,
-          option_name.votes.users[i]
-        );
         const index: number = option_name.votes.users.indexOf(
           event.content.user?.id
         );

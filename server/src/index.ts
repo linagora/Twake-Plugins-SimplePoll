@@ -2,11 +2,12 @@ import express from "express";
 import config from "config";
 import { HookEvent } from "./types";
 import { closeMenu, askConfirm, sendPoll } from "./events";
+import * as crypto from "crypto";
 
+const prefix_conf = config.get("server.prefix");
 const prefix =
-  "/" +
+  (prefix_conf ? "/" : "") +
   ((config.get("server.prefix") || "") as string).replace(/(^\/|\/$)/g, "");
-console.log(prefix);
 
 const app = express();
 
@@ -16,6 +17,18 @@ app.use(prefix + "/assets", express.static(__dirname + "/../assets"));
 // Entrypoint for every events comming from Twake
 app.post(prefix + "/hook", async (req, res) => {
   const event = req.body as HookEvent;
+
+  const signature = req.headers["x-twake-signature"];
+
+  const expectedSignature = crypto
+    .createHmac("sha256", config.get("credentials.secret"))
+    .update(JSON.stringify(req.body))
+    .digest("hex");
+
+  if (signature !== expectedSignature) {
+    res.status(403).send({ error: "Wrong signature" });
+    return;
+  }
 
   if (
     (event.type === "interactive_message_action" &&
