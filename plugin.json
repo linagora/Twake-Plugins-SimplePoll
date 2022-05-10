@@ -20,9 +20,12 @@
     "twake": {
       "version": 1,
       "chat": {
-        "input": {
-          "icon": "/assets/logo.png"
-        }
+        "commands": [
+          {
+            "command": "",
+            "description": "\"Question ?\" \"Answer 1\" \"Answer 2\""
+          }
+        ]
       }
     }
   }

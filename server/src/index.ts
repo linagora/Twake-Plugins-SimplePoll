@@ -16,6 +16,7 @@ app.use(prefix + "/assets", express.static(__dirname + "/../assets"));
 
 // Entrypoint for every events comming from Twake
 app.post(prefix + "/hook", async (req, res) => {
+  console.log("Request /hook");
   const event = req.body as HookEvent;
 
   const signature = req.headers["x-twake-signature"];
@@ -51,6 +52,8 @@ app.post(prefix + "/hook", async (req, res) => {
     //Close ephemeral message
     return res.send(await closeMenu(event));
   }
+
+  return res.send({ ok: false });
 });
 
 const port = config.get("server.port");

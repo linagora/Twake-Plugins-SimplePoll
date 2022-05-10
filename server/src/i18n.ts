@@ -19,7 +19,7 @@ const locales: any = {
 };
 
 export const t = (language: string, key: string, variables: string[] = []) => {
-  let str = locales[language][key] || locales[defaultLanguage][key] || key;
+  let str = locales[language]?.[key] || locales[defaultLanguage][key] || key;
   variables.forEach((v, i) => (str = str.replace("@" + (i + 1), v)));
   return str;
 };
