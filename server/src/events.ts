@@ -109,7 +109,7 @@ export const sendPoll = async (event: HookEvent) => {
 
     msg.context = event.content.message.context;
     msg.blocks = formatPoll(
-      `${event.content.user?.first_name} ${event.content.user?.last_name}`,
+      event.content.user,
       event.content.message.context.poll_name,
       event.content.message.context.options
     );
