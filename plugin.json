@@ -21,7 +21,7 @@
       "version": 1,
       "chat": {
         "input": {
-          "icon": "/asserts/logo.png"
+          "icon": "/assets/logo.png"
         }
       }
     }
