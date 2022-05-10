@@ -4,17 +4,17 @@ const locales: any = {
     close: "Close",
     confirm: "Confirm",
     tap_send: "Tap on Confirm to send your poll",
-    username_created_poll: "$1 created a poll",
-    nb_votes: "$1 votes",
-    percent_votes: "$1% of votes",
+    username_created_poll: "@1 created a poll",
+    nb_votes: "@1 votes",
+    percent_votes: "@1% of votes",
   },
   fr: {
     close: "Fermer",
     confirm: "Confirmer",
     tap_send: "Appuyez sur Confirmer pour envoyer votre sondage",
-    username_created_poll: "$1 a créé un sondage",
-    nb_votes: "$1 votes",
-    percent_votes: "$1% of votes",
+    username_created_poll: "@1 a créé un sondage",
+    nb_votes: "@1 votes",
+    percent_votes: "@1% of votes",
   },
 };
 
