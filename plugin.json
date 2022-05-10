@@ -1,31 +1,29 @@
 {
-    "server": {
-        "entrypoint": "server/index.ts"
-    },
-    "identity": {
-        "name": "simple Poll",
-        "code": "simple-poll",
-        "icon": "/asserts/logo.png",
-        "description": "Simple poll service for Twake",
-        "website": "https://twake.app",
-        "compatibility": ["twake"]
-    },
-    "api": {
-        "hooks_url": "/hook"
-    },
-    "access": {
-        "write": [
-            "messages"
-        ]
-    },
-    "display": {
-        "twake": {
-            "version": 1,
-            "chat": {
-                "input": {
-                    "icon": "/asserts/logo.png"
-                }
-            }
+  "server": {
+    "entrypoint": "server/index.ts"
+  },
+  "identity": {
+    "name": "Simple Poll",
+    "code": "simple-poll",
+    "icon": "/asserts/logo.png",
+    "description": "Simple poll service for Twake",
+    "website": "https://twake.app",
+    "compatibility": ["twake"]
+  },
+  "api": {
+    "hooks_url": "/hook"
+  },
+  "access": {
+    "write": ["messages"]
+  },
+  "display": {
+    "twake": {
+      "version": 1,
+      "chat": {
+        "input": {
+          "icon": "/asserts/logo.png"
         }
+      }
     }
+  }
 }

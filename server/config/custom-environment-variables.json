@@ -1,16 +1,12 @@
 {
-    "credentials": {
-        "id": "CREDENTIALS_ID",
-        "secret": "CREDENTIALS_SECRET",
-        "endpoint": "CREDENTIALS_ENDPOINT"
-    },
-    "server": {
-        "port": "SERVER_PORT",
-        "prefix": "SERVER_PREFIX",
-        "endpoint": "SERVER_ENDPOINT"
-    },
-    "simplePoll": {
-        "endpoint": "N8N_ENDPOINT",
-        "jwt_secret": "N8N_JWT_SECRET"
-      }
+  "credentials": {
+    "id": "CREDENTIALS_ID",
+    "secret": "CREDENTIALS_SECRET",
+    "endpoint": "CREDENTIALS_ENDPOINT"
+  },
+  "server": {
+    "port": "SERVER_PORT",
+    "prefix": "SERVER_PREFIX",
+    "endpoint": "SERVER_ENDPOINT"
+  }
 }

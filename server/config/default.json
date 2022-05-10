@@ -1,16 +1,12 @@
 {
-    "credentials": {
-        "id": "",
-        "secret": "",
-        "endpoint": "https://web.twake.app"
-    },
-    "server": {
-        "port": 3000,
-        "prefix": "",
-        "endpoint": "https://plugins.twake.app"
-    },
-    "simplePoll": {
-        "endpoint": "https://web.twake.app/simplepoll",
-        "jwt_secret": "secret"
-    }
+  "credentials": {
+    "id": "",
+    "secret": "",
+    "endpoint": "https://web.twake.app"
+  },
+  "server": {
+    "port": 3000,
+    "prefix": "",
+    "endpoint": "https://plugins.twake.app"
+  }
 }

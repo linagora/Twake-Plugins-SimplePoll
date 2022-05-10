@@ -2,17 +2,22 @@ import { HookEvent, PollOptions } from "./types";
 import { t } from "./i18n";
 
 export const formatPoll = (
-  username: string,
+  user: HookEvent["content"]["user"],
   poll_name: string,
   options: PollOptions
 ) => {
+  const username = [user?.first_name, user?.last_name]
+    .map((a) => a?.trim())
+    .filter(Boolean)
+    .join(" ");
+  const lang = user?.preferences.locale || "";
   return [
     {
       type: "twacode",
       elements: [
         {
           type: "system",
-          content: `${username}created a poll`,
+          content: t(lang, "username_created_poll", [username]),
         },
         {
           type: "attachment",
@@ -72,9 +77,9 @@ export const askConfirmPoll = (
 };
 
 const formatCompile = (options: PollOptions) => {
-  const options_List = [];
+  const options_list = [];
   for (let i = 0; i < options.options.length; i++) {
-    options_List.push({
+    options_list.push({
       type: "bold",
       content: {
         type: "compile",
@@ -83,10 +88,10 @@ const formatCompile = (options: PollOptions) => {
           options.options[i].name.slice(1),
       },
     });
-    options_List.push({ type: "br" });
+    options_list.push({ type: "br" });
   }
 
-  return options_List;
+  return options_list;
 };
 
 const formatButton = (poll_name: string, options: PollOptions) => {
@@ -110,6 +115,8 @@ const formatButton = (poll_name: string, options: PollOptions) => {
 };
 
 const formatGraph = (options: PollOptions) => {
+  const lang = options.language || "";
+
   const options_list = [];
   let total = 0;
   for (let i = 0; i < options.options.length; i++) {
@@ -130,18 +137,18 @@ const formatGraph = (options: PollOptions) => {
     });
     options_list.push({
       type: "system",
-      content:
-        total === 0
-          ? " 0% voted"
-          : ` ${Math.round(
-              (options.options[i].votes.number * 100) / total
-            )}% voted`,
+      content: t(lang, "percent_votes", [
+        (total === 0
+          ? 0
+          : Math.round((options.options[i].votes.number * 100) / total)
+        ).toString(),
+      ]),
     });
     options_list.push({ type: "br" });
   }
   options_list.push({
     type: "system",
-    content: `${total} votes`,
+    content: t(lang, "nb_votes", [total.toString()]),
   });
   return options_list;
 };

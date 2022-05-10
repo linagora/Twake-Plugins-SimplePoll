@@ -46,7 +46,12 @@ export const askConfirm = async (event: HookEvent) => {
       recipient_context_id: event.connection_id,
     },
 
-    context: formatMessageContext(twake_context, poll_name, options),
+    context: formatMessageContext(
+      event.content.user,
+      twake_context,
+      poll_name,
+      options
+    ),
   };
 
   await sendMessage(msg, twake_context);
@@ -65,12 +70,13 @@ export const sendPoll = async (event: HookEvent) => {
     subtype: "application",
 
     blocks: formatPoll(
-      `${event.content.user?.first_name} ${event.content.user?.last_name}`,
+      event.content.user,
       event.content.message.context.poll_name,
       event.content.message.context.options
     ),
 
     context: formatMessageContext(
+      event.content.user,
       event.content.message.context,
       event.content.message.context.poll_name,
       event.content.message.context.options,
@@ -127,17 +133,20 @@ export const closeMenu = async (event: HookEvent) => {
 };
 
 const formatMessageContext = (
+  user: HookEvent["content"]["user"],
   options: any,
   poll_name?: any,
   poll_options?: any,
   allow_delete?: string
 ) => {
+  const lang = user?.preferences.locale || "";
   return {
     company_id: options.company_id,
     workspace_id: options.workspace_id,
     channel_id: options.channel_id,
     thread_id: options.thread_id,
     poll_name: poll_name,
+    language: options.language || lang,
     options: poll_options,
     allow_delete: allow_delete,
   };

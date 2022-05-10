@@ -25,6 +25,7 @@ export type HookEvent = {
 };
 
 export type PollOptions = {
+  language: string;
   options: [
     {
       name: string;

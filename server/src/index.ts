@@ -33,7 +33,7 @@ app.post(prefix + "/hook", async (req, res) => {
   if (
     (event.type === "interactive_message_action" &&
       event.name === "generate") ||
-    (event.type === "action" && event.name === "command") //TODO
+    (event.type === "action" && event.name === "command")
   ) {
     //Create confirmation view of the poll
     return res.send(await askConfirm(event));
