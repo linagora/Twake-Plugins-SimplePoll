@@ -4,7 +4,8 @@ import { t } from "./i18n";
 export const formatPoll = (
   user: HookEvent["content"]["user"],
   poll_name: string,
-  options: PollOptions
+  options: PollOptions,
+  context: any
 ) => {
   const username = [user?.first_name, user?.last_name]
     .map((a) => a?.trim())
@@ -17,7 +18,9 @@ export const formatPoll = (
       elements: [
         {
           type: "system",
-          content: t(lang, "username_created_poll", [username]),
+          content: t(lang, "username_created_poll", [
+            context?.creator_name || username,
+          ]),
         },
         {
           type: "attachment",

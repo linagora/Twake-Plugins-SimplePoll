@@ -4,6 +4,7 @@ import { HookEvent } from "./types";
 import { getAccessToken } from "./utils";
 import { askConfirmPoll, formatPoll } from "./messages";
 import config from "config";
+import { t } from "./i18n";
 
 export const askConfirm = async (event: HookEvent) => {
   const twake_context = {
@@ -66,14 +67,25 @@ export const sendPoll = async (event: HookEvent) => {
     message_id: "undefined",
   };
 
+  const user = event.content.user;
+
+  const username = [user?.first_name, user?.last_name]
+    .map((a) => a?.trim())
+    .filter(Boolean)
+    .join(" ");
+  const lang = user?.preferences.locale || "";
+
   const msg = {
     subtype: "application",
 
     blocks: formatPoll(
-      event.content.user,
+      user,
       event.content.message.context.poll_name,
-      event.content.message.context.options
+      event.content.message.context.options,
+      event.content.message.context
     ),
+
+    text: t(lang, "username_created_poll", [username]),
 
     context: formatMessageContext(
       event.content.user,
@@ -111,7 +123,8 @@ export const sendPoll = async (event: HookEvent) => {
     msg.blocks = formatPoll(
       event.content.user,
       event.content.message.context.poll_name,
-      event.content.message.context.options
+      event.content.message.context.options,
+      event.content.message.context
     );
     twake_context.thread_id = event.content.message.thread_id;
     twake_context.message_id = event.content.message.id;
@@ -139,8 +152,14 @@ const formatMessageContext = (
   poll_options?: any,
   allow_delete?: string
 ) => {
+  const username = [user?.first_name, user?.last_name]
+    .map((a) => a?.trim())
+    .filter(Boolean)
+    .join(" ");
   const lang = user?.preferences.locale || "";
   return {
+    creator_name: options.creator_name || username,
+    creator_id: options.creator_id || user?.id,
     company_id: options.company_id,
     workspace_id: options.workspace_id,
     channel_id: options.channel_id,
